@@ -1,0 +1,14 @@
+﻿@using ExercicioAccenture.Models
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <form method="get">
+        <select name="Coin1" asp-items="ViewBag.CoinList"></select>
+        <select name="Coin2" asp-items="ViewBag.CoinList"></select>
+        <input type="submit" name="save" value="save"/>
+    </form>
+</body>
+</html>
