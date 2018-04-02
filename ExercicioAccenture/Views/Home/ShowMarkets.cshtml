@@ -1,3 +1,13 @@
-﻿
+﻿@model ExercicioAccenture.Services.Markets
+
+<table>
+@foreach (var z in Model.Mercados)
+{
+        <tr>
+            <td>@z.Name</td>
+            <td>@z.Price</td>
+        </tr>
+}
+</table>
 
 <a asp-action="Index" asp-controller="Home">Back</a>

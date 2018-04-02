@@ -21,7 +21,7 @@ namespace ExercicioAccenture.Controllers
             {
                 resultado.Add(new SelectListItem
                 {
-                    Text = "(" + k.Code + ") " + k.Name,
+                    Text = k.Name + " (" + k.Code + ")",
                     Value = k.Code
                 });
             }
@@ -31,8 +31,9 @@ namespace ExercicioAccenture.Controllers
 
         public IActionResult ShowMarkets(string Coin1, string Coin2)
         {
-            Console.WriteLine("{0} {1}", Coin1, Coin2 );
-            return View();
+            Markets model = new Markets();
+            model.FetchMarkets(Coin1, Coin2);
+            return View(model);
         }
     }
 }
