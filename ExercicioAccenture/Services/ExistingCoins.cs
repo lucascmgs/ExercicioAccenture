@@ -15,23 +15,10 @@ namespace ExercicioAccenture.Services
         private const string URL = "https://www.cryptonator.com/api/currencies";
 
 
-        public static List<SelectListItem> GetAllCodes()
-        {
-            var resultado = new List<SelectListItem>();
-            foreach(string k in RequestCoins())
-            {
-                resultado.Add(new SelectListItem
-                {
-                    Text = k,
-                    Value = k
-                });
-            }
-            return resultado;
-        }
 
-        public static List<string> RequestCoins()
+        public static List<Coin> RequestCoins()
         {
-            List<string> resultado = new List<string>();
+            List<Coin> resultado = new List<Coin>();
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(URL);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -42,11 +29,11 @@ namespace ExercicioAccenture.Services
                 Newtonsoft.Json.Linq.JObject valores = Newtonsoft.Json.Linq.JObject.Parse(resposta);
                 foreach (var k in valores.SelectToken("rows"))
                 {
-                    resultado.Add("(" + k.SelectToken("code").ToString() + ") " + k.SelectToken("name").ToString());
+                    resultado.Add(new Coin { Name = k.SelectToken("name").ToString(), Code = k.SelectToken("code").ToString()} );
                 }
 
             }
-            resultado.Sort();
+            resultado.Sort((x, y) => x.Name.CompareTo(y.Name));
 
             return resultado;
 

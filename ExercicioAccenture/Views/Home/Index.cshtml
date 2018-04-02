@@ -5,10 +5,10 @@
     <title></title>
 </head>
 <body>
-    <form method="get">
+    <form method="post" asp-controller="Home" asp-action="ShowMarkets">
         <select name="Coin1" asp-items="ViewBag.CoinList"></select>
         <select name="Coin2" asp-items="ViewBag.CoinList"></select>
-        <input type="submit" name="save" value="save"/>
+        <input type="submit" value="Enviar"/>
     </form>
 </body>
 </html>

@@ -37,7 +37,8 @@ namespace ExercicioAccenture
 
         private void ConfigureRoutes(IRouteBuilder routeBuilder)
         {
-            routeBuilder.MapRoute("Default", "{controller=Home}/{action=Index}/");
+            routeBuilder.MapRoute("Default", "{controller=Home}/{action=Index}");
+            
         }
     }
 }
