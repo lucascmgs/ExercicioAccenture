@@ -6,9 +6,11 @@
 </head>
 <body>
     <form method="post" asp-controller="Home" asp-action="ShowMarkets">
+        From coin
         <select name="Coin1" asp-items="ViewBag.CoinList"></select>
+        to coin
         <select name="Coin2" asp-items="ViewBag.CoinList"></select>
-        <input type="submit" value="Enviar"/>
+        <input type="submit" value="Check"/>
     </form>
 </body>
 </html>

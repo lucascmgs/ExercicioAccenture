@@ -1,5 +1,9 @@
 ﻿@model ExercicioAccenture.ViewModels.ShowMarketsViewModel
 
+From @ViewBag.Coin1 to @ViewBag.Coin2
+
+@if (Model.Mercados.Conteudo.Count() > 0)
+    {
 <table>
     <tr><td>Exchanges:</td> <td>Prices:</td></tr>
     @foreach (var z in Model.Mercados.Conteudo)
@@ -10,6 +14,12 @@
         </tr>
     }
 </table>
-Time of Request: @Model.HoraRequisicao.TimeOfDay.ToString().Split(".")[0]
+    }
+    else
+    {
+        <p>No results found </p>
+    }
+ 
+    Time of Request: @Model.HoraRequisicao.TimeOfDay.ToString().Split(".")[0]
 <br/>
 <a asp-action="Index" asp-controller="Home">Back</a>

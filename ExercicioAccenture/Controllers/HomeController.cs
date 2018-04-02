@@ -33,6 +33,8 @@ namespace ExercicioAccenture.Controllers
         public IActionResult ShowMarkets(string Coin1, string Coin2)
         {
             ShowMarketsViewModel model = new ShowMarketsViewModel();
+            ViewBag.Coin1 = Coin1;
+            ViewBag.Coin2 = Coin2;
             model.Mercados.FetchMarkets(Coin1, Coin2);
             model.HoraRequisicao = DateTime.Now;
             return View(model);

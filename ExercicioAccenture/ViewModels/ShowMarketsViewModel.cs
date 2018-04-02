@@ -1,4 +1,5 @@
-﻿using ExercicioAccenture.Services;
+﻿using ExercicioAccenture.Models;
+using ExercicioAccenture.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
