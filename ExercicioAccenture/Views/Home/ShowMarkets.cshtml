@@ -1,13 +1,15 @@
-﻿@model ExercicioAccenture.Services.Markets
+﻿@model ExercicioAccenture.ViewModels.ShowMarketsViewModel
 
 <table>
-@foreach (var z in Model.Mercados)
-{
+    <tr><td>Exchanges:</td> <td>Prices:</td></tr>
+    @foreach (var z in Model.Mercados.Conteudo)
+    {
         <tr>
             <td>@z.Name</td>
             <td>@z.Price</td>
         </tr>
-}
+    }
 </table>
-
+Time of Request: @Model.HoraRequisicao.TimeOfDay.ToString().Split(".")[0]
+<br/>
 <a asp-action="Index" asp-controller="Home">Back</a>

@@ -1,5 +1,6 @@
 ﻿using ExercicioAccenture.Models;
 using ExercicioAccenture.Services;
+using ExercicioAccenture.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -31,8 +32,9 @@ namespace ExercicioAccenture.Controllers
 
         public IActionResult ShowMarkets(string Coin1, string Coin2)
         {
-            Markets model = new Markets();
-            model.FetchMarkets(Coin1, Coin2);
+            ShowMarketsViewModel model = new ShowMarketsViewModel();
+            model.Mercados.FetchMarkets(Coin1, Coin2);
+            model.HoraRequisicao = DateTime.Now;
             return View(model);
         }
     }
