@@ -30,13 +30,13 @@ namespace ExercicioAccenture.Controllers
             return View();
         }
 
-        public IActionResult ShowMarkets(string Coin1, string Coin2)
+        public IActionResult ShowMarkets(string coin1, string coin2)
         {
             ShowMarketsViewModel model = new ShowMarketsViewModel();
-            ViewBag.Coin1 = Coin1;
-            ViewBag.Coin2 = Coin2;
-            model.Mercados.FetchMarkets(Coin1, Coin2);
-            model.HoraRequisicao = DateTime.Now;
+            ViewBag.coin1 = coin1;
+            ViewBag.coin2 = coin2;
+            model.WantedExchanges.FetchMarkets(coin1, coin2);
+            model.RequestTime = DateTime.Now;
             return View(model);
         }
     }

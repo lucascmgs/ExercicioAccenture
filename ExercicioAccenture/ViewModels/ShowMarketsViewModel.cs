@@ -9,12 +9,12 @@ namespace ExercicioAccenture.ViewModels
 {
     public class ShowMarketsViewModel
     {
-        public Markets Mercados { get; set; }
-        public DateTime HoraRequisicao { get; set; }
+        public Markets WantedExchanges { get; set; }
+        public DateTime RequestTime { get; set; }
         public ShowMarketsViewModel()
         {
-            this.Mercados = new Markets();
-            this.HoraRequisicao = new DateTime();
+            this.WantedExchanges = new Markets();
+            this.RequestTime = new DateTime();
         }
     }
 }

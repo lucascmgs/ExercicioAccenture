@@ -2,11 +2,11 @@
 
 From @ViewBag.Coin1 to @ViewBag.Coin2
 
-@if (Model.Mercados.Conteudo.Count() > 0)
-    {
+@if (Model.WantedExchanges.Content.Count() > 0)
+{
 <table>
     <tr><td>Exchanges:</td> <td>Prices:</td></tr>
-    @foreach (var z in Model.Mercados.Conteudo)
+    @foreach (var z in Model.WantedExchanges.Content)
     {
         <tr>
             <td>@z.Name</td>
@@ -20,6 +20,6 @@ From @ViewBag.Coin1 to @ViewBag.Coin2
         <p>No results found </p>
     }
  
-    Time of Request: @Model.HoraRequisicao.TimeOfDay.ToString().Split(".")[0]
+    Time of Request: @Model.RequestTime.TimeOfDay.ToString().Split(".")[0]
 <br/>
 <a asp-action="Index" asp-controller="Home">Back</a>
