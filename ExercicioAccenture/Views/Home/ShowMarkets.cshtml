@@ -1,9 +1,11 @@
 ﻿@model ExercicioAccenture.ViewModels.ShowMarketsViewModel
 
-From @ViewBag.Coin1 to @ViewBag.Coin2
 
-@if (Model.WantedExchanges.Content.Count() > 0)
+@if (@ViewBag.ErrorMessage == "")
 {
+    
+<p>From @ViewBag.Coin1 to @ViewBag.Coin2</p>
+    
 <table>
     <tr><td>Exchanges:</td> <td>Prices:</td></tr>
     @foreach (var z in Model.WantedExchanges.Content)
@@ -14,11 +16,12 @@ From @ViewBag.Coin1 to @ViewBag.Coin2
         </tr>
     }
 </table>
-    }
-    else
-    {
-        <p>No results found </p>
-    }
+    
+}
+else
+{
+    <p>@ViewBag.ErrorMessage</p>
+}
  
     Time of Request: @Model.RequestTime.TimeOfDay.ToString().Split(".")[0]
 <br/>

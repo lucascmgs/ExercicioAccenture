@@ -7,7 +7,7 @@
 <body>
     <form method="post" asp-controller="Home" asp-action="ShowMarkets">
         From coin
-        <select name="coin1" asp-items="ViewBag.CoinList"></select>
+        <select name="coin1" asp-items="ViewBag.CoinList" autofocus></select>
         to coin
         <select name="coin2" asp-items="ViewBag.CoinList"></select>
         <input type="submit" value="Check"/>

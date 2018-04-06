@@ -35,7 +35,16 @@ namespace ExercicioAccenture.Controllers
             ShowMarketsViewModel model = new ShowMarketsViewModel();
             ViewBag.coin1 = coin1;
             ViewBag.coin2 = coin2;
-            model.WantedExchanges.FetchMarkets(coin1, coin2);
+            try
+            {
+                model.WantedExchanges.FetchMarkets(coin1, coin2);
+                ViewBag.ErrorMessage = "";
+            } catch(Exception e)
+            {
+                ViewBag.ErrorMessage = e.Message;
+            }
+            
+            
             model.RequestTime = DateTime.Now;
             return View(model);
         }
