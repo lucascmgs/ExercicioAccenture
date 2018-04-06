@@ -30,9 +30,9 @@ namespace ExercicioAccenture.Controllers
             return View();
         }
 
-        public IActionResult ShowMarkets(string coin1, string coin2)
+        public IActionResult ShowExchanges(string coin1, string coin2)
         {
-            ShowMarketsViewModel model = new ShowMarketsViewModel();
+            ShowExchangesViewModel model = new ShowExchangesViewModel();
             ViewBag.coin1 = coin1;
             ViewBag.coin2 = coin2;
             try

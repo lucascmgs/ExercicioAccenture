@@ -10,19 +10,22 @@ using System.Threading.Tasks;
 
 namespace ExercicioAccenture.Services
 {
-    public class Markets
+    public class RequestedExchanges
     {
-        public List<Market> Content{ get; set; }
+        public List<Exchange> Content{ get; set; }
         public DateTime RequestTime { get; set; }
 
         public void FetchMarkets(string coin1, string coin2)
         {
-            List<Market> result = new List<Market>();
+            List<Exchange> result = new List<Exchange>();
             if (coin1 == coin2)
             {
                 throw new Exception("The coins are the same. No results.");
             }
-            
+
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+           
+
             string text = "<!DOCTYPE html>";
             while (text.Contains("<!DOCTYPE html>"))
             {
@@ -36,34 +39,40 @@ namespace ExercicioAccenture.Services
                 {
                     text = response.Content.ReadAsStringAsync().Result;
                 }
+                if (watch.ElapsedMilliseconds > 5000)
+                {
+                    watch.Stop();
+                    throw new TimeoutException();
+                }
             } 
 
             Console.WriteLine(text);
 
-            Newtonsoft.Json.Linq.JObject values = Newtonsoft.Json.Linq.JObject.Parse(text);
+            RequestedExchangeData values = new RequestedExchangeData();
 
-            
+            try
+            {
+                values = Newtonsoft.Json.JsonConvert.DeserializeObject<RequestedExchangeData>(text);
 
-            if (values.SelectToken("success").ToString() == "True")
+            } catch (Exception e)
             {
-                if(values.SelectToken("ticker").SelectToken("markets").ToString() == "[]")
-                {
-                    throw new Exception( "No exchanges found.");
-                }
-                
-                foreach (var k in values.SelectToken("ticker").SelectToken("markets"))
-                {
-                    result.Add(new Market { Name = k.SelectToken("market").ToString(), Price = Double.Parse(k.SelectToken("price").ToString(), CultureInfo.InvariantCulture) });
-                }
-                
-            } else
-            {
-                throw new Exception( values.SelectToken("error").ToString());
+                throw new Exception("The pair of coins does not have registered Exchanges");
             }
-            
+
+            result = values.Ticker.Markets;
 
             result.Sort((x, y) => x.Price.CompareTo(y.Price));
+
+            this.RequestTime = TimeStampToDateTime(values.Timestamp);
+
             this.Content = result;
+        }
+
+        public static DateTime TimeStampToDateTime(double unixTimeStamp)
+        {
+            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+            return dtDateTime;
         }
     }
 

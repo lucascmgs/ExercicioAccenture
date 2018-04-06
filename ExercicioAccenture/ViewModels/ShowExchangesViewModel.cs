@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace ExercicioAccenture.ViewModels
 {
-    public class ShowMarketsViewModel
+    public class ShowExchangesViewModel
     {
-        public Markets WantedExchanges { get; set; }
+        public RequestedExchanges WantedExchanges { get; set; }
         public DateTime RequestTime { get; set; }
-        public ShowMarketsViewModel()
+        public ShowExchangesViewModel()
         {
-            this.WantedExchanges = new Markets();
+            this.WantedExchanges = new Services.RequestedExchanges();
             this.RequestTime = new DateTime();
         }
     }

@@ -1,4 +1,4 @@
-﻿@model ExercicioAccenture.ViewModels.ShowMarketsViewModel
+﻿@model ExercicioAccenture.ViewModels.ShowExchangesViewModel
 
 
 @if (@ViewBag.ErrorMessage == "")
@@ -11,18 +11,18 @@
     @foreach (var z in Model.WantedExchanges.Content)
     {
         <tr>
-            <td>@z.Name</td>
+            <td>@z.Market</td>
             <td>@z.Price</td>
         </tr>
     }
 </table>
     
+    <p>Time of Request: @Model.WantedExchanges.RequestTime.TimeOfDay.ToString().Split(".")[0]</p>
 }
 else
 {
     <p>@ViewBag.ErrorMessage</p>
 }
  
-    Time of Request: @Model.RequestTime.TimeOfDay.ToString().Split(".")[0]
 <br/>
 <a asp-action="Index" asp-controller="Home">Back</a>

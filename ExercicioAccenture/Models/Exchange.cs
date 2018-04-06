@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace ExercicioAccenture.Models
 {
-    public class Market
+    public class Exchange
     {
-        public string Name { get; set; }
+        public string Market { get; set; }
         public Double Price { get; set; }
+        public Double Volume { get; set; }
     }
 }
