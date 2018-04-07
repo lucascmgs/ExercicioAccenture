@@ -14,8 +14,6 @@ namespace ExercicioAccenture.Services
     {
         private const string URL = "https://www.cryptonator.com/api/currencies";
 
-
-
         public static List<Coin> RequestCoins()
         {
             List<Coin> result = new List<Coin>();

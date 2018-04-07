@@ -9,11 +9,11 @@ namespace ExercicioAccenture.ViewModels
 {
     public class ShowExchangesViewModel
     {
-        public RequestedExchanges WantedExchanges { get; set; }
+        public List<Exchange> Exchanges { get; set; }
         public DateTime RequestTime { get; set; }
         public ShowExchangesViewModel()
         {
-            this.WantedExchanges = new Services.RequestedExchanges();
+            this.Exchanges = new List<Exchange>();
             this.RequestTime = new DateTime();
         }
     }

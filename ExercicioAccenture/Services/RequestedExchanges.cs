@@ -1,4 +1,5 @@
 ﻿using ExercicioAccenture.Models;
+using ExercicioAccenture.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,12 +11,10 @@ using System.Threading.Tasks;
 
 namespace ExercicioAccenture.Services
 {
-    public class RequestedExchanges
+    public static class RequestedExchanges
     {
-        public List<Exchange> Content{ get; set; }
-        public DateTime RequestTime { get; set; }
 
-        public void FetchMarkets(string coin1, string coin2)
+        public static async Task<ShowExchangesViewModel> FetchMarkets(string coin1, string coin2)
         {
             List<Exchange> result = new List<Exchange>();
             if (coin1 == coin2)
@@ -24,7 +23,7 @@ namespace ExercicioAccenture.Services
             }
 
             var watch = System.Diagnostics.Stopwatch.StartNew();
-           
+
 
             string text = "<!DOCTYPE html>";
             while (text.Contains("<!DOCTYPE html>"))
@@ -34,7 +33,7 @@ namespace ExercicioAccenture.Services
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(URL);
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage response = client.GetAsync(arguments).Result;
+                HttpResponseMessage response = await client.GetAsync(arguments);
                 if (response.IsSuccessStatusCode)
                 {
                     text = response.Content.ReadAsStringAsync().Result;
@@ -44,7 +43,7 @@ namespace ExercicioAccenture.Services
                     watch.Stop();
                     throw new TimeoutException();
                 }
-            } 
+            }
 
             Console.WriteLine(text);
 
@@ -63,9 +62,8 @@ namespace ExercicioAccenture.Services
 
             result.Sort((x, y) => x.Price.CompareTo(y.Price));
 
-            this.RequestTime = TimeStampToDateTime(values.Timestamp);
 
-            this.Content = result;
+            return new ShowExchangesViewModel { Exchanges = result, RequestTime = TimeStampToDateTime(values.Timestamp)};
         }
 
         public static DateTime TimeStampToDateTime(double unixTimeStamp)
