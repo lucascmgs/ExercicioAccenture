@@ -45,7 +45,7 @@ namespace ExercicioAccenture.Services
                 }
             }
 
-            Console.WriteLine(text);
+            //Console.WriteLine(text);
 
             RequestedExchangeData values = new RequestedExchangeData();
 
@@ -55,6 +55,7 @@ namespace ExercicioAccenture.Services
 
             } catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 throw new Exception("The pair of coins does not have registered Exchanges");
             }
 

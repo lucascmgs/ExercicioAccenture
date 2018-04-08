@@ -34,9 +34,18 @@ namespace ExercicioAccenture.Controllers
         public async Task<IActionResult> ShowExchanges(string coin1, string coin2)
         {
             ShowExchangesViewModel model = new ShowExchangesViewModel();
-            
             ViewBag.coin1 = coin1;
             ViewBag.coin2 = coin2;
+
+            if(RedisConnectorHelper.CheckKeys(coin1, coin2))
+            {
+                string exc = RedisConnectorHelper.GetExchanges(coin1, coin2);
+                Console.WriteLine(exc);
+                model = Newtonsoft.Json.JsonConvert.DeserializeObject<ShowExchangesViewModel>(exc);
+
+                return View(model);
+            }
+
             try
             {
                 model = await RequestedExchanges.FetchMarkets(coin1, coin2);
@@ -45,7 +54,9 @@ namespace ExercicioAccenture.Controllers
             {
                 ViewBag.ErrorMessage = e.Message;
             }
-            
+
+            RedisConnectorHelper.SetExchanges(coin1, coin2, model);
+            Console.WriteLine(model.Serialize());
             
             return View(model);
         }

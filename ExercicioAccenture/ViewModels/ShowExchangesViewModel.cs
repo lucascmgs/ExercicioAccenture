@@ -16,5 +16,11 @@ namespace ExercicioAccenture.ViewModels
             this.Exchanges = new List<Exchange>();
             this.RequestTime = new DateTime();
         }
+
+        public string Serialize()
+        {
+            string result = Newtonsoft.Json.JsonConvert.SerializeObject(this);
+            return result;
+        }
     }
 }
