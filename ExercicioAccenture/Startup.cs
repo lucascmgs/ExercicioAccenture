@@ -18,7 +18,13 @@ namespace ExercicioAccenture
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            RedisConnectorHelper.Initialize();
+            try
+            {
+                RedisConnectorHelper.Initialize();
+            } catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

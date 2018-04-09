@@ -9,8 +9,8 @@ namespace ExercicioAccenture.Services
 {
     public static class RedisConnectorHelper
     {
-        private static ConnectionMultiplexer Redis = ConnectionMultiplexer.Connect("localhost");
-        private static IDatabase DataBase = Redis.GetDatabase();
+        private static ConnectionMultiplexer Redis;
+        private static IDatabase DataBase;
 
         public static void Initialize()
         {
@@ -20,12 +20,18 @@ namespace ExercicioAccenture.Services
 
         public static string GetExchanges(string coin1, string coin2)
         {
-            return DataBase.StringGet(coin1 + coin2);
+            string result = DataBase.StringGet(coin1 + coin2);
+            if (!CheckKeys(coin1, coin2))
+            {
+                throw new Exception("In-cache values deprecated");
+            }
+            return result;
         }
 
         public static void SetExchanges(string coin1, string coin2, ShowExchangesViewModel model)
         {
-            DataBase.KeyExpire(coin1 + coin2, System.TimeSpan.FromSeconds(30));
+            DataBase.StringSet(coin1 + coin2, model.Serialize());
+            DataBase.KeyExpire(coin1 + coin2, System.TimeSpan.FromSeconds(60 - (DateTime.Now.Second - model.RequestTime.Second)));
         }
 
         public static bool CheckKeys(string coin1, string coin2)

@@ -38,15 +38,14 @@ namespace ExercicioAccenture.Services
                 {
                     text = response.Content.ReadAsStringAsync().Result;
                 }
-                if (watch.ElapsedMilliseconds > 5000)
+                if (watch.ElapsedMilliseconds > 8000)
                 {
                     watch.Stop();
                     throw new TimeoutException();
                 }
             }
 
-            //Console.WriteLine(text);
-
+            
             RequestedExchangeData values = new RequestedExchangeData();
 
             try
